@@ -52,7 +52,7 @@ def returnAirportInfo(id):
             project_location = config.get(env, id + '.project')
             print('project_location : ' + project_location)
             output = subprocess.call(["./gitpush.ksh",project_location])
-            print("output : " + output)
+            print("output : " + str(output))
             #Remove unwated medata field from SAP Hana Response
             outputroot = {} 
             outputroot ["status"] = "Success"
