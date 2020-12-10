@@ -2,7 +2,6 @@ from flask import Flask
 from flask import jsonify
 from flask import request
 from flask import Response
-from objdict import ObjDict
 import requests
 import json
 import os
@@ -18,11 +17,10 @@ config = configparser.RawConfigParser()
 config.read('app.properties')
 
 #Overloaded returnError method for error handling
-def returnError(httpErrorCode, iata, api, error=None):
+def returnError(httpErrorCode, id, error=None):
     print('httpErrorCode: ' + str(httpErrorCode))
-    #endpoint_url = config.get(envType, envType + '.' + api + '.endpoint.url') + iata
     outputroot = json.loads(config.get(envType, str(httpErrorCode) + '.error.message'))
-    outputroot['error']['endpoint'] = api
+    outputroot['error']['endpoint'] = id
     if not error is None:
         outputroot['error']['message'] = error
     outputroot_json = json.dumps(outputroot)
@@ -37,46 +35,44 @@ def returnAirportError():
         return Response(error, status=400, mimetype='application/json')
 
 @app.route('/git/v1/projects/projectid/<string:id>', methods=['POST'])
-def returnAirportInfo(iata):
+def returnAirportInfo(id):
     outputroot = {}
     #Validate IATA
     try:
-        if len(iata) > 3:
-            raise GITException
-        elif len(iata) < 3:
-            raise GITException
-        elif not iata.isalpha():
+        if len(id) < 3:
             raise GITException
     except GITException:
-        error = returnError(400, iata)
+        error = returnError(400, id)
         return Response(error, status=400, mimetype='application/json')
     else:
         #If id Valid - Call script to invoke git push
         try:
-            api = config.get(envType, envType + '.airport.locator.url') + iata
-            print('api_url : ' + api)
-            airport_response = requests.get(api, timeout=5.0)
-            airport_response_json = json.loads(airport_response.text)
-
+            env = os.environ.get('ENV', 'local')
+            print('env : ' + env)
+            project_location = config.get(env, id + '.project')
+            print('project_location : ' + project_location)
+            output = subprocess.call(["./gitpush.ksh",project_location])
+            print("output : " + output)
             #Remove unwated medata field from SAP Hana Response
-            airport_response_json ["results"][0].pop('__metadata')
+            outputroot = {} 
+            outputroot ["status"] = "Success"
         #Handle exceptions
         except requests.exceptions.HTTPError as error:
-            error = returnError(504, iata, api, str(error))
+            error = returnError(504, id, str(error))
             return Response(error, status=504, mimetype='application/json')
         except requests.exceptions.ConnectionError as error:
-            error = returnError(504, iata, api, str(error))
+            error = returnError(504, id, str(error))
             return Response(error, status=504, mimetype='application/json')
         except requests.exceptions.Timeout as error:
-            error = returnError(504, iata, api, str(error))
+            error = returnError(504, id, str(error))
             return Response(error, status=504, mimetype='application/json')
         except requests.exceptions.RequestException as error:
-            error = returnError(504, iata, api, str(error))
+            error = returnError(504, id, str(error))
             return Response(error, status=504, mimetype='application/json')
         except:
             #Error Handler
-            error = returnError(airport_response.status_code, iata, api)
-            return Response(error, status=airport_response.status_code, mimetype='application/json')
+            error = returnError(500, id)
+            return Response(error, status=500, mimetype='application/json')
 
         #Convert to JSON
         outputroot_json = json.dumps(outputroot)
