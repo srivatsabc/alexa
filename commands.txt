@@ -1,0 +1,89 @@
+npm install -g --production windows-build-tools
+
+Access key ID: AKIASPTBUAMZCI65XE7Q
+Secret access key: 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
+Password: =[uwUI)%OjOD
+
+ask init --aws-setup
+
+
+C:\Srivatsa\28. Alexa\alexa_projects>ask init --aws-setup
+
+Please follow the instruction from https://developer.amazon.com/docs/smapi/set-up-credentials-for-an-amazon-web-services-account.html
+Fill in the AWS Access Key ID and AWS Secret Access Key below. CLI will generate/modify the AWS credential file for you.
+? AWS Access Key ID:  AKIASPTBUAMZCI65XE7Q
+? AWS Secret Access Key:  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
+AWS profile "ask_cli_default" was successfully created. The details are recorded in aws credentials file ($HOME/.aws/credentials).
+
+C:\Srivatsa\28. Alexa\alexa_projects>ask init
+This command will initialize the ASK CLI with a profile associated with your Amazon developer credentials.
+------------------------- Step 1 of 2 : ASK CLI Initialization -------------------------
+? Please create a new profile or overwrite the existing profile.
+ [default]                 ** NULL **
+Switch to "Login with Amazon" page and sign-in with your Amazon developer credentials.
+If your browser did not open the page, run the initialization process again with command "ask init --no-browser".
+ASK Profile "default" was successfully created. The details are recorded in ask-cli config ($HOME/.ask/cli_config).
+Vendor ID set as M3J3XINV73WDNY.
+
+------------------------- Step 2 of 2 : Associate an AWS Profile with ASK CLI -------------------------
+? If you want to host your skill's backend code in AWS Lambda (recommended), you must associate an AWS profile with the ASK CLI. Do you want
+? If you want to host your skill's backend code in AWS Lambda (recommended), you must associate an AWS profile with the ASK CLI. Do you want
+? If you want to host your skill's backend code in AWS Lambda (recommended), you must associate an AWS profile with the ASK CLI. Do you want
+
+ate an AWS profile? Yes
+? Please choose from the following existing AWS profiles or create a new one. ask_cli_default
+AWS profile "ask_cli_default" was successfully associated with your ASK profile "default".
+
+------------------------- Initialization Complete -------------------------
+Here is the summary for the profile setup:
+  ASK Profile: default
+  AWS Profile: ask_cli_default
+  Vendor ID: M3J3XINV73WDNY
+
+C:\Srivatsa\28. Alexa\alexa_projects>
+
+
+C:\Srivatsa\28. Alexa\alexa_projects>ask new
+? Please select the runtime Node.js v10
+? List of templates you can choose Hello World
+? Please type in your skill name:  demo-skill
+Skill "demo-skill" has been created based on the chosen template
+
+C:\Srivatsa\28. Alexa\alexa_projects>
+C:\Srivatsa\28. Alexa\alexa_projects>dir
+ Volume in drive C is TI10707900C
+ Volume Serial Number is 2C11-BB5D
+
+ Directory of C:\Srivatsa\28. Alexa\alexa_projects
+
+01/26/2020  03:41 PM    <DIR>          .
+01/26/2020  03:41 PM    <DIR>          ..
+01/26/2020  03:40 PM             2,465 commands.txt
+01/26/2020  03:41 PM    <DIR>          demo-skill
+               1 File(s)          2,465 bytes
+               3 Dir(s)  463,906,181,120 bytes free
+
+C:\Srivatsa\28. Alexa\alexa_projects>cd demo-skill
+
+C:\Srivatsa\28. Alexa\alexa_projects\demo-skill>dir
+ Volume in drive C is TI10707900C
+ Volume Serial Number is 2C11-BB5D
+
+ Directory of C:\Srivatsa\28. Alexa\alexa_projects\demo-skill
+
+01/26/2020  03:41 PM    <DIR>          .
+01/26/2020  03:41 PM    <DIR>          ..
+01/26/2020  03:41 PM    <DIR>          .ask
+01/26/2020  03:41 PM    <DIR>          .github
+01/26/2020  03:41 PM                43 .gitignore
+01/26/2020  03:41 PM    <DIR>          hooks
+01/26/2020  03:41 PM    <DIR>          instructions
+01/26/2020  03:41 PM    <DIR>          lambda
+01/26/2020  03:41 PM            11,560 LICENSE.txt
+01/26/2020  03:41 PM    <DIR>          models
+01/26/2020  03:41 PM             2,066 README.md
+01/26/2020  03:41 PM             5,224 skill.json
+               4 File(s)         18,893 bytes
+               8 Dir(s)  463,906,181,120 bytes free
+
+http://open-notify.org/Open-Notify-API/People-In-Space/
