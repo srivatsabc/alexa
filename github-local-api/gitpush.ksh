@@ -1,4 +1,4 @@
-#!/usr/bin/ksh
+#!/bin/sh
 # Author - Srivatsa
 
 git_repo=$1
